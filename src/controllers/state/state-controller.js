@@ -47,9 +47,9 @@ const stateController = (
 
   async update(req) {
     try {
-      const { id } = req.params
+      const { stateId } = req.params
 
-      const state = await loadStateById.loadById(id)
+      const state = await loadStateById.loadById(stateId)
 
       if (!state) return forbidden(invalidParamError('stateId'))
 
@@ -59,7 +59,7 @@ const stateController = (
 
       if (requiredFieldError) return badRequest(requiredFieldError)
 
-      await updateState.update({ id, nome, abreviacao })
+      await updateState.update({ stateId, nome, abreviacao })
 
       return noContent()
     } catch (error) {

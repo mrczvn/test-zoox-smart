@@ -21,7 +21,7 @@ const { invalidParamError } = require('../../helpers/errors')
 
 const mockRequest = () => ({
   body: { nome: 'any_nome', abreviacao: 'any_abreviação' },
-  params: { id: 'any_id' }
+  params: { stateId: 'any_id' }
 })
 
 const throwError = () => {
@@ -34,7 +34,7 @@ const makeSut = () => {
   const loadStatesSpy = LoadStatesSpy()
   const loadStateByIdSpy = LoadStateByIdSpy()
   const updateStateSpy = UpdateStateSpy()
-  const deleteStateById = DeleteStateByIdSpy()
+  const deleteStateByIdSpy = DeleteStateByIdSpy()
 
   const sut = stateController(
     validationSpy,
@@ -42,7 +42,7 @@ const makeSut = () => {
     loadStatesSpy,
     loadStateByIdSpy,
     updateStateSpy,
-    deleteStateById
+    deleteStateByIdSpy
   )
 
   return {
@@ -52,7 +52,7 @@ const makeSut = () => {
     loadStatesSpy,
     loadStateByIdSpy,
     updateStateSpy,
-    deleteStateById
+    deleteStateByIdSpy
   }
 }
 
@@ -164,7 +164,7 @@ describe('State Controller', () => {
 
       await sut.update(mockFakeRequest)
 
-      expect(loadStateByIdSpy.id).toBe(mockFakeRequest.params.id)
+      expect(loadStateByIdSpy.id).toBe(mockFakeRequest.params.stateId)
     })
 
     test('Should return 403 if LoadStateById returns null', async () => {
@@ -223,7 +223,7 @@ describe('State Controller', () => {
       await sut.update(mockFakeRequest)
 
       expect(updateStateSpy.updateStateParams).toEqual({
-        id: mockFakeRequest.params.id,
+        stateId: mockFakeRequest.params.stateId,
         ...mockFakeRequest.body
       })
     })
@@ -256,16 +256,6 @@ describe('State Controller', () => {
       expect(loadStateByIdSpy.id).toBe(mockFakeRequest.params.id)
     })
 
-    test('Should return 403 id LoadStateById retuns null', async () => {
-      const { sut, loadStateByIdSpy } = makeSut()
-
-      loadStateByIdSpy.stateModel = null
-
-      const httpResponse = await sut.delete(mockFakeRequest)
-
-      expect(httpResponse).toEqual(forbidden(invalidParamError('stateId')))
-    })
-
     test('Should return 403 if LoadStateById retuns null', async () => {
       const { sut, loadStateByIdSpy } = makeSut()
 
@@ -276,19 +266,31 @@ describe('State Controller', () => {
       expect(httpResponse).toEqual(forbidden(invalidParamError('stateId')))
     })
 
+    test('Should return 500 if LoadStateById throws', async () => {
+      const { sut, loadStateByIdSpy } = makeSut()
+
+      jest
+        .spyOn(loadStateByIdSpy, 'loadById')
+        .mockImplementationOnce(throwError)
+
+      const httpResponse = await sut.delete(mockFakeRequest)
+
+      expect(httpResponse).toEqual(serverError(new Error()))
+    })
+
     test('Should call DeleteStateById with correct values', async () => {
-      const { sut, deleteStateById } = makeSut()
+      const { sut, deleteStateByIdSpy } = makeSut()
 
       await sut.delete(mockFakeRequest)
 
-      expect(deleteStateById.id).toBe(mockFakeRequest.params.id)
+      expect(deleteStateByIdSpy.id).toBe(mockFakeRequest.params.id)
     })
 
     test('Should return 500 if DeleteStateById throws', async () => {
-      const { sut, deleteStateById } = makeSut()
+      const { sut, deleteStateByIdSpy } = makeSut()
 
       jest
-        .spyOn(deleteStateById, 'deleteById')
+        .spyOn(deleteStateByIdSpy, 'deleteById')
         .mockImplementationOnce(throwError)
 
       const httpResponse = await sut.delete(mockFakeRequest)
