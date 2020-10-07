@@ -1,7 +1,13 @@
+module.exports.AddCitySpy = require('./mock-city').AddCitySpy
+module.exports.LoadCitysSpy = require('./mock-city').LoadCitysSpy
+module.exports.LoadCityByIdSpy = require('./mock-city').LoadCityByIdSpy
+module.exports.UpdateCitySpy = require('./mock-city').UpdateCitySpy
+module.exports.DeleteCityByIdSpy = require('./mock-city').DeleteCityByIdSpy
 module.exports.AddStateSpy = require('./mock-state').AddStateSpy
 module.exports.DeleteStateByIdSpy = require('./mock-state').DeleteStateByIdSpy
 module.exports.LoadStatesSpy = require('./mock-state').LoadStatesSpy
 module.exports.LoadStateByIdSpy = require('./mock-state').LoadStateByIdSpy
 module.exports.UpdateStateSpy = require('./mock-state').UpdateStateSpy
-module.exports.AbbreviationValidatorSpy = require('./mock-validation').AbbreviationValidatorSpy
+module.exports.CityValidatorAdapterSpy = require('./mock-validation').CityValidatorAdapterSpy
+module.exports.StateValidatorAdapterSpy = require('./mock-validation').StateValidatorAdapterSpy
 module.exports.ValidationSpy = require('./mock-validation').ValidationSpy

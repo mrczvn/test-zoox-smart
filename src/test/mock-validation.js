@@ -9,15 +9,46 @@ const ValidationSpy = () => ({
   }
 })
 
-const AbbreviationValidatorSpy = () => ({
+const StateValidatorAdapterSpy = () => ({
   isAbbreviationValid: true,
+  isStateNameValid: true,
   abbreviation: null,
+  stateName: null,
 
-  isValid(abbreviation) {
+  isValidAbbreviation(abbreviation) {
     this.abbreviation = abbreviation
 
     return this.isAbbreviationValid
+  },
+
+  isValidName(stateName) {
+    this.stateName = stateName
+
+    return this.isStateNameValid
   }
 })
 
-module.exports = { ValidationSpy, AbbreviationValidatorSpy }
+const CityValidatorAdapterSpy = () => ({
+  isStateIdValid: true,
+  isCityNameValid: true,
+  stateId: null,
+  cityName: null,
+
+  isValidStateId(stateId) {
+    this.stateId = stateId
+
+    return this.isStateIdValid
+  },
+
+  isValidName(cityName) {
+    this.cityName = cityName
+
+    return this.isCityNameValid
+  }
+})
+
+module.exports = {
+  ValidationSpy,
+  StateValidatorAdapterSpy,
+  CityValidatorAdapterSpy
+}
