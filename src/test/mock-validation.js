@@ -9,4 +9,15 @@ const ValidationSpy = () => ({
   }
 })
 
-module.exports = ValidationSpy
+const AbbreviationValidatorSpy = () => ({
+  isAbbreviationValid: true,
+  abbreviation: null,
+
+  isValid(abbreviation) {
+    this.abbreviation = abbreviation
+
+    return this.isAbbreviationValid
+  }
+})
+
+module.exports = { ValidationSpy, AbbreviationValidatorSpy }

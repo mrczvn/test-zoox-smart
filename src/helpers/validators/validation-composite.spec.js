@@ -1,9 +1,9 @@
 const validationComposite = require('./validation-composite')
-const validationSpy = require('../../test/mock-validation')
+const { ValidationSpy } = require('../../test')
 const { missingParamError } = require('../errors')
 
 const makeSut = () => {
-  const validationSpies = [validationSpy(), validationSpy()]
+  const validationSpies = [ValidationSpy(), ValidationSpy()]
 
   const sut = validationComposite(validationSpies)
 

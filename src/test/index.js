@@ -3,4 +3,5 @@ module.exports.DeleteStateByIdSpy = require('./mock-state').DeleteStateByIdSpy
 module.exports.LoadStatesSpy = require('./mock-state').LoadStatesSpy
 module.exports.LoadStateByIdSpy = require('./mock-state').LoadStateByIdSpy
 module.exports.UpdateStateSpy = require('./mock-state').UpdateStateSpy
-module.exports.ValidationSpy = require('./mock-validation')
+module.exports.AbbreviationValidatorSpy = require('./mock-validation').AbbreviationValidatorSpy
+module.exports.ValidationSpy = require('./mock-validation').ValidationSpy
