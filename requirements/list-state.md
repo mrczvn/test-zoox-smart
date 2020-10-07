@@ -8,4 +8,4 @@
 
 > ## Exceções
 
-1. ✅ Retorna erro **500** se der erro ao tentar listar as Estados
+1. ✅ Retorna erro **500** se der erro ao tentar listar os Estados
