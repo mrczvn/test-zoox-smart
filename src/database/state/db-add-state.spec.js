@@ -56,6 +56,7 @@ describe('DbAddState', () => {
     const { sut, addStateRepositorySpy } = makeSut()
 
     await sut.add({ nome, abreviacao })
+
     expect(addStateRepositorySpy.addStateParams.nome).toBe(nome)
     expect(addStateRepositorySpy.addStateParams.abreviacao).toBe(abreviacao)
   })

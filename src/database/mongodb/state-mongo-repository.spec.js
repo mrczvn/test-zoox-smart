@@ -27,7 +27,7 @@ const mockUpdateStateParams = () => ({
 
 const makeSut = () => stateMongoRepository()
 
-describe('AccountMongoRepository', () => {
+describe('StateMongoRepository', () => {
   beforeAll(async () => await MongoHelper.connect(process.env.MONGO_URL))
 
   afterAll(async () => await MongoHelper.disconnect())
@@ -42,18 +42,11 @@ describe('AccountMongoRepository', () => {
     test('Should return an state on success', async () => {
       const sut = makeSut()
 
-      const addStateParams = mockAddStateParams()
+      await sut.add(mockAddStateParams())
 
-      const state = await sut.add(addStateParams)
+      const count = await stateCollection.countDocuments()
 
-      expect(state).toBeTruthy()
-      expect(state.id).toBeTruthy()
-      expect(state.nome).toBe(addStateParams.nome)
-      expect(state.abreviacao).toBe(addStateParams.abreviacao)
-      expect(state.data_de_criacao).toBe(addStateParams.data_de_criacao)
-      expect(state.data_da_ultima_alteracao).toBe(
-        addStateParams.data_da_ultima_alteracao
-      )
+      expect(count).toBe(1)
     })
   })
 

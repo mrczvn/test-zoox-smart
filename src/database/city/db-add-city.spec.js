@@ -57,7 +57,8 @@ describe('DbAddCity', () => {
 
     await sut.add({ stateId, nome })
 
-    expect(addCityRepositorySpy.addCityParams).toEqual({ stateId, nome })
+    expect(addCityRepositorySpy.addCityParams.nome).toBe(nome)
+    expect(addCityRepositorySpy.addCityParams.stateId).toBe(stateId)
   })
 
   test('Should return null if AddCityRepository returns an null', async () => {

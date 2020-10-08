@@ -15,7 +15,7 @@ const stateMongoRepository = () => ({
 
     const states = await stateCollection.find().toArray()
 
-    return states.map((state) => MongoHelper.map(state))
+    return states.length ? states.map((state) => MongoHelper.map(state)) : null
   },
 
   async loadById(stateId) {
