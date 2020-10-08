@@ -253,7 +253,7 @@ describe('State Controller', () => {
 
       await sut.delete(mockFakeRequest)
 
-      expect(loadStateByIdSpy.id).toBe(mockFakeRequest.params.id)
+      expect(loadStateByIdSpy.id).toBe(mockFakeRequest.params.stateId)
     })
 
     test('Should return 403 if LoadStateById retuns null', async () => {
@@ -283,7 +283,7 @@ describe('State Controller', () => {
 
       await sut.delete(mockFakeRequest)
 
-      expect(deleteStateByIdSpy.id).toBe(mockFakeRequest.params.id)
+      expect(deleteStateByIdSpy.id).toBe(mockFakeRequest.params.stateId)
     })
 
     test('Should return 500 if DeleteStateById throws', async () => {

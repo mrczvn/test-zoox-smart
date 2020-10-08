@@ -69,13 +69,13 @@ const stateController = (
 
   async delete(req) {
     try {
-      const { id } = req.params
+      const { stateId } = req.params
 
-      const state = await loadStateById.loadById(id)
+      const state = await loadStateById.loadById(stateId)
 
       if (!state) return forbidden(invalidParamError('stateId'))
 
-      await deleteStateById.deleteById(id)
+      await deleteStateById.deleteById(stateId)
 
       return noContent()
     } catch (error) {
