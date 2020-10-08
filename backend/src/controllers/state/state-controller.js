@@ -25,7 +25,7 @@ const stateController = (
 
       const { nome, abreviacao } = req.body
 
-      const state = addState.add({ nome, abreviacao })
+      const state = await addState.add({ nome, abreviacao })
 
       if (!state) return forbidden(StateInUseError())
 
@@ -39,7 +39,9 @@ const stateController = (
     try {
       const states = await loadStates.load()
 
-      return states.length ? ok(states) : noContent()
+      if (!states) return noContent()
+
+      return ok(states)
     } catch (error) {
       return serverError(error)
     }

@@ -22,7 +22,7 @@ const cityController = (
     try {
       const { stateId } = req.params
 
-      const state = loadStateById.loadById(stateId)
+      const state = await loadStateById.loadById(stateId)
 
       if (!state) return badRequest(invalidParamError('stateId'))
 
@@ -46,7 +46,9 @@ const cityController = (
     try {
       const citys = await loadCitys.load()
 
-      return citys.length ? ok(citys) : noContent()
+      if (!citys) return noContent()
+
+      return ok(citys)
     } catch (error) {
       return serverError(error)
     }
