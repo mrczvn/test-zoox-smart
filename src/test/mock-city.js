@@ -61,6 +61,7 @@ const DeleteCityByIdSpy = () => ({
 })
 
 module.exports = {
+  mockCityModel,
   AddCitySpy,
   LoadCitysSpy,
   LoadCityByIdSpy,
