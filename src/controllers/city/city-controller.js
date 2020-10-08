@@ -56,9 +56,9 @@ const cityController = (
     try {
       const { cityId } = req.params
 
-      const state = await loadCityById.loadById(cityId)
+      const city = await loadCityById.loadById(cityId)
 
-      if (!state) return forbidden(invalidParamError('cityId'))
+      if (!city) return forbidden(invalidParamError('cityId'))
 
       const { nome } = req.body
 
@@ -78,9 +78,9 @@ const cityController = (
     try {
       const { cityId } = req.params
 
-      const state = await loadCityById.loadById(cityId)
+      const city = await loadCityById.loadById(cityId)
 
-      if (!state) return forbidden(invalidParamError('stateId'))
+      if (!city) return forbidden(invalidParamError('stateId'))
 
       await deleteCityById.deleteById(cityId)
 
