@@ -22,7 +22,7 @@ const makeSut = () => {
 describe('DbAddState', () => {
   const { nome, abreviacao } = mockAddStateParams()
 
-  test('Should call LoadStateByNameRepositorySpy with correct values', async () => {
+  test('Should call LoadStateByNameRepository with correct values', async () => {
     const { sut, loadStateByNameRepositorySpy } = makeSut()
 
     await sut.add({ nome, abreviacao })
@@ -30,7 +30,7 @@ describe('DbAddState', () => {
     expect(loadStateByNameRepositorySpy.name).toBe(nome)
   })
 
-  test('Should return null if LoadStateByNameRepositorySpy returns an null', async () => {
+  test('Should return null if LoadStateByNameRepository returns an null', async () => {
     const { sut, loadStateByNameRepositorySpy } = makeSut()
 
     loadStateByNameRepositorySpy.state = mockStateModel()
@@ -40,7 +40,7 @@ describe('DbAddState', () => {
     expect(stateData).toBeNull()
   })
 
-  test('Should throw if LoadStateByNameRepositorySpy throws', async () => {
+  test('Should throw if LoadStateByNameRepository throws', async () => {
     const { sut, loadStateByNameRepositorySpy } = makeSut()
 
     jest
@@ -52,7 +52,7 @@ describe('DbAddState', () => {
     await expect(stateData).rejects.toThrow()
   })
 
-  test('Should call AddStateRepositorySpy with correct values', async () => {
+  test('Should call AddStateRepository with correct values', async () => {
     const { sut, addStateRepositorySpy } = makeSut()
 
     await sut.add({ nome, abreviacao })
@@ -60,7 +60,7 @@ describe('DbAddState', () => {
     expect(addStateRepositorySpy.addStateParams.abreviacao).toBe(abreviacao)
   })
 
-  test('Should throw if AddStateRepositorySpy throws', async () => {
+  test('Should throw if AddStateRepository throws', async () => {
     const { sut, addStateRepositorySpy } = makeSut()
 
     jest.spyOn(addStateRepositorySpy, 'add').mockImplementationOnce(throwError)
