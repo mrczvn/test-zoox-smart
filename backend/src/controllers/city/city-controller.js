@@ -32,7 +32,7 @@ const cityController = (
 
       const { nome } = req.body
 
-      const city = addCity.add({ stateId, nome })
+      const city = await addCity.add({ stateId, nome })
 
       if (!city) return forbidden(CityInUseError())
 

@@ -1,6 +1,6 @@
 const dbAddCity = (loadCityByNameRepository, addCityRepository) => ({
   add: async ({ stateId, nome }) => {
-    const city = loadCityByNameRepository.loadByName(nome)
+    const city = await loadCityByNameRepository.loadByName(nome)
 
     if (!city) {
       const atThisMoment = new Date()

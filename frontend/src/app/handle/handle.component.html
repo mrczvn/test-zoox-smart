@@ -1,0 +1,109 @@
+<div>
+  <div class="p-3 bg-secondary text-white">
+    <p class="h3 text-center">Estados</p>
+  </div>
+
+  <button (click)="showAddStateForm()" class="btn btn-info" style="margin: 5px">Adicionar Estado</button>
+
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Abreviação</th>
+        <th scope="col">Operações</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let state of states$ | async">
+      <tr>
+        <td class="text-uppercase"> {{ state.nome }} </td>
+        <td class="text-uppercase"> {{ state.abreviacao }} </td>
+        <td>
+          <button (click)="showUpdateStateForm(state)" class="btn btn-primary" style="margin: 5px">Atualizar</button>
+          <button (click)="deleteState(state.id)" class="btn btn-danger" style="margin: 5px">Deletar</button>
+          <button (click)="showAddCityForm(state.id)" class="btn btn-info" style="margin: 5px">Adicionar Cidade</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="isUpdateStateActived" style="margin-top: 50px; margin-left: 50px;">
+    <h4>Atualizar Estado</h4>
+    <form (ngSubmit)="updateState(updateStateForm)" #updateStateForm="ngForm">
+      <div class="form-group">
+        <label for="nome">Nome do Estado</label>
+        <input type="text" id="nome" name="nome" class="form-control" required [(ngModel)]="stateToBeUpdate.nome"
+          style="width: 400px" />
+      </div>
+      <div class="form-group">
+        <label for="side">Abreviação</label>
+        <input type="text" id="abreviacao" name="abreviacao" class="form-control" required
+          [(ngModel)]="stateToBeUpdate.abreviacao" style="width: 400px" />
+      </div>
+      <button class="btn btn-primary" type="submit">Atualizar</button>
+    </form>
+  </div>
+
+  <div *ngIf="isAddStateActived" style="margin-top: 50px; margin-left: 50px;">
+    <h4>Criar Estado</h4>
+    <form (ngSubmit)="addState(addStateForm)" #addStateForm="ngForm">
+      <div class="form-group">
+        <label for="nome">Nome do Estado</label>
+        <input type="text" id="nome" name="nome" class="form-control" required ngModel style="width: 400px" />
+      </div>
+      <div class="form-group">
+        <label for="side">Abreviação</label>
+        <input type="text" id="abreviacao" name="abreviacao" class="form-control" required ngModel
+          style="width: 400px" />
+      </div>
+      <button class="btn btn-primary" type="submit">Criar</button>
+    </form>
+  </div>
+
+  <div *ngIf="isAddCityActived" style="margin-top: 50px; margin-left: 50px;">
+    <h4>Adicionar Cidade</h4>
+    <form (ngSubmit)="addCity(addCityForm)" #addCityForm="ngForm">
+      <div class="form-group">
+        <label for="nome">Nome da Cidade</label>
+        <input type="text" id="nome" name="nome" class="form-control" required [(ngModel)]="cityToBeAdd.nome"
+          style="width: 400px" />
+      </div>
+      <button class="btn btn-primary" type="submit">Adicionar</button>
+    </form>
+  </div>
+
+  <br>
+
+  <div class="p-3 bg-secondary text-white">
+    <p class="h3 text-center">Cidades</p>
+  </div>
+
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Operações</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let city of citys$ | async">
+      <tr>
+        <td class="text-uppercase"> {{ city.nome }} </td>
+        <td>
+          <button (click)="showUpdateCityForm(city.id)" class="btn btn-primary" style="margin: 5px">Atualizar</button>
+          <button (click)="deleteCity(city.id)" class="btn btn-danger" style="margin: 5px">Deletar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="isUpdateCityActived" style="margin-top: 50px; margin-left: 50px;">
+    <h4>Atualizar Cidade</h4>
+    <form (ngSubmit)="updateCity(updateCityForm)" #updateCityForm="ngForm">
+      <div class="form-group">
+        <label for="nome">Nome da Cidade</label>
+        <input type="text" id="nome" name="nome" class="form-control" required [(ngModel)]="cityToBeUpdate.nome"
+          style="width: 400px" />
+      </div>
+      <button class="btn btn-primary" type="submit">Atualizar</button>
+    </form>
+  </div>
+</div>

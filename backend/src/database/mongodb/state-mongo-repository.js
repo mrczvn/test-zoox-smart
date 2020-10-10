@@ -40,9 +40,7 @@ const stateMongoRepository = () => ({
     const atThisMoment = new Date()
 
     await stateCollection.updateOne(
-      {
-        _id: stateId
-      },
+      { _id: new ObjectId(stateId) },
       {
         $set: {
           nome,

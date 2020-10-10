@@ -1,10 +1,11 @@
-const MongoHelper = require('../database/mongodb/helpers/mongo-helper')
 const app = require('./app')
+const config = require('./config')
+const MongoHelper = require('../database/mongodb/helpers/mongo-helper')
 
-MongoHelper.connect(
-  'mongodb+srv://test_sky:test_sky@cluster0.rnk3s.mongodb.net/Cluste0?retryWrites=true&w=majority'
-)
+MongoHelper.connect(config.MONGO_URL)
   .then(async () => {
-    app.listen(3000, () => console.log('api is running'))
+    app.listen(config.API_URL, () =>
+      console.log(`Server running at http://localhost:${config.API_URL}`)
+    )
   })
   .catch(console.error)

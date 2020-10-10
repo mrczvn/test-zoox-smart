@@ -164,7 +164,7 @@ describe('City Controller', () => {
     test('Should return 204 if LoadCitys returns empty', async () => {
       const { sut, loadCitysSpy } = makeSut()
 
-      loadCitysSpy.citysModels = []
+      loadCitysSpy.citysModels = null
 
       const httpResponse = await sut.getAll()
 

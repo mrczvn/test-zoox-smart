@@ -24,7 +24,7 @@ const cityMongoRepository = () => ({
   async loadById(cityId) {
     const cityCollection = await MongoHelper.getCollection('citys')
 
-    const city = await cityCollection.findOne({ _id: cityId })
+    const city = await cityCollection.findOne({ _id: new ObjectId(cityId) })
 
     return city ? MongoHelper.map(city) : city
   },
@@ -44,7 +44,7 @@ const cityMongoRepository = () => ({
 
     await cityCollection.updateOne(
       {
-        _id: cityId
+        _id: new ObjectId(cityId)
       },
       {
         $set: {
